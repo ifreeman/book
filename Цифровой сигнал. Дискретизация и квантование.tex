@@ -1,0 +1,901 @@
+%в каждой главе нумерация с единицы, номер главы не включать
+%нумерация уравнений, только по номеру главы
+%dx => \,dx
+%\eqno
+%\int => \int\limits
+%\sum => \sum\limits
+
+
+%выбор класса документа
+\documentclass[a4paper,10pt,oneside]{scrbook}
+%выбор кодировки
+\usepackage{cmap}
+%выбор языка документа
+\usepackage[english,russian]{babel} 
+\selectlanguage{russian}
+\usepackage[warn]{mathtext}
+%начинать первый параграф с красной строки
+%\usepackage{indentfirst}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\pagestyle{plain} %нумерация страниц внизу
+\pagenumbering{arabic} %нумирация арабскими
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Теорема}[chapter] %для определения теоремы на русском языке
+\newtheorem{lemma}{Лемма}[chapter] %для определения лемм
+\newtheorem{approval}{Утверждение}[chapter] %для определениея утверждения
+\newtheorem{example}{Пример}[chapter] %для определения примера
+%\theoremstyle{definition}
+\newtheorem{definit}{Определение}[chapter] %для определения определений
+
+%переопределение счетчиков
+\renewcommand{\thelemma}{\arabic{lemma}}%вывод счетчка леммы 
+\renewcommand{\thetheorem}{\arabic{theorem}}%вывод счетчика теоремы
+\renewcommand{\theapproval}{\arabic{approval}}%вывод счетчка утверждения 
+\renewcommand{\theexample}{\arabic{example}}%вывод счетчка примера
+\renewcommand{\thedefinit}{\arabic{definit}}%вывод счетчка определения
+ 
+\DeclareMathOperator{\sign}{sign}
+
+\begin{document}
+
+
+	\begin{titlepage}
+		\title{Математические основы обработки цифровых сигналов}
+		\author{Масюков Андрей Вадимович}
+		\date{Тверь, 2010 г.}
+		\maketitle %создает титульный лист
+	\end{titlepage}
+	
+	\tableofcontents %содержание
+
+	\chapter{Введение}
+	\section{Цифровой сигнал. Дискретизация и квантование.}
+	цифровой сигнал = дискретизация + квантование.
+
+	Задачи:
+	\begin{enumerate}
+		\item сигнал-помеха(фильтр)
+		\item аппроксимация(сжатие)
+	\end{enumerate}
+	
+	Гармонический анализ 
+	\begin{enumerate}
+		\item (фурье)-> ДПФ
+		\item ДПФ-дискретное преобразование фурье
+		\item БПФ-быстрое преобразование фурье
+	\end{enumerate}
+	
+	\section{Элементы функционального анализа}
+
+	Функция $f$ непрерывна на $[a,b]$, то есть $f \in C[a,b]$, если 
+	\begin{equation}
+		\lim_{x\to y}f(x) = f(y)
+		\label{lim_def}
+	\end{equation}
+	для всех $y\in [a,b]$. По определению предела, формула \eqref{lim_def}
+	означает, что для любого (сколь угодно малого) $\varepsilon>0$
+	существует $\delta>0$ такое,
+	что $\vert f(x)-f(y)\vert<\varepsilon$
+	для всех $x$ в интервале $\vert x-y\vert< \delta$.
+	Пространство $C[a,b]$ является банаховым, то есть линейным, нормированным 
+	и полным. Линейность означает, что любая линейная комбинация элементов
+	пространства тоже принадлежит этому пространству. Норма в $C[a,b]$ определяется
+	как
+	\begin{equation}
+		\Vert f\Vert_{C[a,b]}=\sup_{x\in [a,b]}\vert f(x)\vert. 
+		\label{norm_C_def}
+	\end{equation}
+	Понятие нормы необходимо для определения сходимости в функциональном
+	пространстве. (Например, сходимость итераций численного решения.)
+	В силу определения \eqref{norm_C_def},
+	сходимость $f_n \rightarrow f$ в $C[a,b]$ при $n \rightarrow \infty$
+	означает равномерную сходимость 
+	$ f_n(x) \underset{x \in [a,b]}{\rightrightarrows} f(x)$
+	при $n \rightarrow \infty$.
+	
+	Полнота пространства означает сходимость любой
+	фундаментальной последовательности (последовательности Коши). По определению,
+	последовательность $\{f_n\}$ является фундаментальной, если для любого
+	$\varepsilon>0$ существует номер $m$ такой, что для любых $n>m$ и     
+	$k>m$ выполняется $\Vert f_n-f_k \Vert < \varepsilon$.
+	
+	Пространство непрервных на всей числовой оси функций обозначают 
+	$C(\mathbb R)$ или просто $C$. С нормой 
+	\begin{equation}
+		\Vert f\Vert_C=\sup_{x\in {\mathbb R}}\vert f(x)\vert 
+		\label{norm_C(R)_def}
+	\end{equation}
+	оно является банаховым. Просранство непрерывно дифференцируемых
+	функций $C^1$ с нормой  
+	\begin{equation}
+		\Vert f\Vert_{C^1}=\sup_{x\in {\mathbb R}}
+		\left(\vert f(x)\vert+\left\vert \frac{df}{dx}\right\vert\right) 
+		\label{norm_C1_def}
+	\end{equation}
+	тоже банахово.
+	
+	Можно привести пример 
+	\begin{equation}
+		\lim_{\varepsilon\to +0}\arctan\frac{x}{\varepsilon}
+		= \frac{\pi}{2}\sign(x)
+		\label{discont_ex}
+	\end{equation}
+	сходимости непрерывных функций к разрывной функции. 
+	Это не противоречит полноте $C$, так как здесь нет равномерной
+	сходимости, то есть сходимости в $C$. Однако пример \eqref{discont_ex}
+	показывает, что максимальные нормы \eqref{norm_C_def},
+	\eqref{norm_C(R)_def}, \eqref{norm_C1_def} не всегда удобны.
+	
+	Пространство $L_1$ абсолютно интегрируемых (по Лебегу) функций
+	с интегральной нормой
+	\begin{equation}
+		\Vert f\Vert_1=\int\limits_{-\infty}^{+\infty}\vert f(x)\vert \,dx
+		\label{norm_L1_def}
+	\end{equation}
+	также является банаховым. Равенство $\Vert f \Vert_1 =0$ означает,
+	что $f(x)=0$ почти везде, то есть для всех $x \in {\mathbb R}$ за
+	исключением, возможно, точек множества меры ноль. Для функций, имющих конечное
+	число точек разрыва, интеграл Лебега равен интегралу Римана (то есть пределу
+	интегральных сумм Дарбу).
+	
+	Для эффективного сжатия информации необходимы ортогональные базисы, то есть
+	понятие скалярного произведения (inner product). Пространство $L_2$ функций
+	с абсолютно интегрируемым квадратом является гильбертовым, то есть банаховым
+	пристранством со скалярным произведением
+	\begin{equation}
+		(f,g) \overset{def}{=}
+		\int\limits_{-\infty}^{+\infty} f(x) g^{*}(x) \,dx, 
+		\label{inner_product_def}
+	\end{equation}
+	где звездочка обозначает комплексное сопряжение. То есть рассматриваются
+	как вещественнозначное $L_2: {\mathbb R}\rightarrow {\mathbb R}$, так и
+	комплекснозначное ${\mathbb R}\rightarrow {\mathbb C}$. Норма в $L_2$
+	равна
+	\begin{equation}
+		\Vert f \Vert_2 \overset{def}{=} \sqrt{(f,f)} =
+		\left( \int\limits_{-\infty}^{+\infty} \vert f(x) \vert ^2  \,dx \right) 
+		^\frac{1}{2}. 
+		\label{norm_L2_def}
+	\end{equation}
+	Для упражнения докажите, что приведенные выше определения удовлетворяют
+	аксиомам нормы и скалярного произведения, а также неравенство
+	Коши-Шварца-Буняковского
+	\begin{equation}
+		\left\vert\int\limits_{-\infty}^{+\infty}f(x)g^*(x)\,dx\right\vert^2 \ 
+		\leq\int\limits_{-\infty}^{+\infty}\vert f(x)\vert^2 \,\,
+		dx\int\limits_{-\infty}^{+\infty}\vert g(x)\vert^2\,dx.
+		\label{Couchy_ineq}
+	\end{equation}
+	
+	В нулевом прибижении параграф готов. Возможны опечатки
+	и последующее расширенее. Но, главное, он принял нормальный вид
+	математического текста. 
+	
+	Сможете продолжить дальше в таком духе?
+	
+
+
+
+
+
+	\begin{eqnarray}
+		f\in C[a,b]\Leftrightarrow\lim_{x\to y}f(x) = f(y) \forall y\in [a,b] \Leftrightarrow \nonumber\\ 
+		\forall y\in[a,b]\  \forall >0\ \exists\delta\colon\vert x-y\vert <\delta\Rightarrow\vert f(x)-f(y)\vert < \varepsilon
+	\end{eqnarray}
+
+	Банахово пространство, то есть линейное, нормированное и полное.
+	\begin{eqnarray}
+		f_1\in C[a,b],f_2\in C[a,b]\Rightarrow
+		\alpha f_1+\beta f_2\in C[a,b]\ \forall\alpha,\beta\in R  \nonumber\\
+		\Vert f\Vert_{C[a,b]}=\sup_{x\in [a,b]}\vert f(x)\vert 
+	\end{eqnarray}
+	Полнота означает:
+	\begin{equation}
+		f_{n} \rightarrow f \text{ в }
+		C[a,b]\Leftrightarrow \Vert f_{n} - f\Vert \rightrightarrows 0, 
+		n\rightarrow \infty \ g \in L\ x\in[a,b]
+	\end{equation}
+	
+	Фундаментальная последовательность ( Коши ):
+	\begin{equation}
+		\forall\varepsilon\quad \exists N\colon  \forall N_{1},N_{2} > N  
+		\quad  \Vert f_{N_{1}}-f_{N_{2}}\Vert <\varepsilon\Rightarrow
+		\lim_{n\to\infty}f_{n}=f\in C[a,b]
+	\end{equation}
+	сходится.\newline
+	Например
+	\begin{equation}
+		\lim_{\varepsilon\to 0}\arctan\frac{x}{\varepsilon}= \frac{\pi}{2}sign(x)
+	\end{equation}
+	нет левосторонней сходимости.
+
+	\begin{equation}
+		f\in L_1\Leftrightarrow\int\limits_{-\infty}^{+\infty}\vert f(x)\vert\,dx < +\infty
+	\end{equation}
+	\begin{description}
+		\item$\Vert f\Vert_{1} = \int\limits_{-\infty}^{+\infty}\vert f(x)\vert\,dx$
+		\item$\Vert \lambda f\Vert = \vert\lambda\vert\ \Vert f\Vert,\forall\lambda\in R$
+		\item$\Vert f_1 + f_2\Vert \leqslant ||f_1|| + ||f_2|| $
+	\end{description}
+	Интеграл Лебега для полноты.
+	\begin{equation}
+		\int\limits_{0}^{1}D(x)\,dx = 0
+	\end{equation}
+	
+	$\Vert f\Vert_1 = 0 \Rightarrow f = 0 \text{ ``почти везде``}$
+
+	$$ \fbox{$ L_2(R) $} $$
+
+
+	\begin{equation}
+		f\in L_1\Leftrightarrow\int\limits_{-\infty}^{+\infty}\vert f(x)\vert \,dx < +\infty
+	\end{equation}
+	
+	\begin{description}
+		\item $f\in L_2\Leftrightarrow\int\limits_{-\infty}^{+\infty}\vert f(x)\vert^2 \,dx < +\infty$
+		\item $\Vert f\Vert_{2} = \left(\int\limits_{-\infty}^{+\infty}\vert f(x)\vert^2 \,dx\right)^{1/2}$
+	\end{description}
+	
+	Гильбертово пространство = Банахово + скалярное произведение
+	\begin{equation}
+		(f,g) = \int\limits_{-\infty}^{+\infty}f(x)g^*(x)\,dx 
+	\end{equation}
+	
+	\begin{description}
+		\item$\Vert f\Vert = \sqrt{(f,f)}$
+		\item$\vert\int\limits_{-\infty}^{+\infty}f(x)g^*(x)\,dx\vert^2 \ 
+		\leq\int\limits_{-\infty}^{+\infty}\vert f(x)\vert^2\,dx\int\limits_{-\infty}^{+\infty}\vert g(x)\vert^2\,dx$
+	\end{description}
+
+
+	\begin{proof}[ Доказательство ]
+	
+		\begin{gather*}
+			Im_f = Im_g = 0 \nonumber\\
+			0\leq(f + \lambda g,f + \lambda g) = (f,f) +\lambda^2(g,g) + 2\lambda(f,g) \nonumber\\
+			0\geq D = (f,g)^2 - (f,f)(g,g) \nonumber\\
+			z = x + iy\qquad\qquad x,y\in R \nonumber\\
+			arg Arg\qquad \qquad \quad Imz = \vert z\vert\sin\arg z \nonumber\\
+			\qquad z = \vert z\vert e^{i\arg z} \nonumber\\
+			e^{i\phi} = \cos \phi + i\sin \phi \nonumber\\
+			\fbox{
+			$\cos \phi = \frac{e^{i\phi} + e^{-i\phi}}{2} $
+			$\sin \phi = \frac{e^{i\phi} - e^{-i\phi}}{2i}$
+			}  
+		\end{gather*}
+		
+		$$\sqrt[3]{z}  = \sqrt[3]{\vert z\vert} - e^{i(\arg z + 2\pi k)/3} ,k = 0,1,2,...$$
+	\end{proof}
+	
+	\section{Комплексные числа.}
+	\begin{description}
+		\item $ z=x+iy \  x,y\in R $
+		\item $ y=Im\,z $
+		\item $ |z|=\sqrt{x^2+y^2} $
+		\item \textbf{Здесь должен быть график}
+		\item \text{Фаза } $\Rightarrow arg \, z $
+		\item $Arg$ означает однозначная, а $\arg$ неоднозначная. 
+		\item $ x=Rez $
+		\item $ Rez = |z| \cos\arg z $
+		\item $ Im \, z = |z| \, \sin\arg z $
+		\item $ z = |z|e^{i\arg z} $
+	\end{description}
+	Формула Эйлера:
+	\begin{equation}
+		e^{ix}=\cos x + i\sin x
+	\end{equation}
+	-где $ i $  мнимая единица.
+	\begin{description}
+		\item $ e^{i\pi}= -1 $
+		\item $ \sin x = \frac{e^{ix}-e^{-ix}}{2i} $
+		\item $ \cos x = \frac{e^{ix}+e^{-ix}}{2} $
+	\end{description}
+	функция: число $\rightarrow$ число\\
+	оператор: функция $\rightarrow$ функция\\
+	функционал: функция $\rightarrow$ число\\
+	носитель $\sup f = \{x\colon f(x)\notin 0\}$ \\
+	Функция называется финитной, если носитель конечен  $\Leftrightarrow\sup f \in [a,b]$
+
+	\section{Преобразование Фурье и свертка}
+
+	Преобразование Фурье
+	\begin{equation}
+		F[f](\omega )\equiv\widehat{f}(\omega )\equiv\int\limits_{-\infty}^{+\infty}f(x)e^{i\omega x}\,dx
+	\end{equation}
+	где $\widehat{f}(\omega )$ - спектор, $F$ - оператора Фурье.
+
+	Обратное преобразование Фурье 
+	\begin{equation}
+		F^{-1}[\widehat{f}](x)=\frac{1}{2\pi}\int\limits_{-\infty}^{+\infty}\widehat{f}(\omega)e^{-i\omega x}\,dx 
+	\end{equation}
+
+	Свойства преобразования Фурье
+	\begin{equation}
+		F[f(x+a)]=\int\limits_{-\infty}^{+\infty}f(x+a)e^{i\omega x}\,dx=\int\limits_{-\infty}^{+\infty}f(x')e^{i\omega (x'-a)}\,dx'=e^{i\omega a}\widehat{f}(\omega )
+	\end{equation}
+
+	\begin{equation}
+		F[f(\frac{x}{c})]=\int\limits_{-\infty}^{+\infty}f(\frac{x}{c})e^{i\omega x}\,dx=|c|\int\limits_{-\infty}^{+\infty}f(x')e^{i\omega x'c}\,dx'=|c|\widehat{f}(\omega c) 
+	\end{equation}
+
+	\begin{equation}
+		F[f']= -\int\limits_{-\infty}^{+\infty}f(x)i\omega e^{i\omega x}\,dx=-i\omega \widehat{f}(\omega ) 
+	\end{equation}
+
+	\begin{equation}
+		F[f'']= -\omega ^2\widehat{f}(\omega ) 
+	\end{equation}
+
+	\begin{equation}
+		\widehat{f}'(\omega )=\int\limits_{-\infty}^{+\infty}f(x)ixe^{i\omega x}\,dx 
+	\end{equation}
+
+	\begin{equation}
+		(f*g)(x)=\int\limits_{-\infty}^{+\infty}f(x')g(x-x')\,dx' 
+	\end{equation}
+
+
+	\begin{definit}[ Свертка  ] Сверткой функций $f$ и $x$ называется функция
+		\begin{equation}
+			y(t)= f * x= \int\limits_{-\infty}^{+\infty} f(t')x(t - t')\,dt'
+		\end{equation}
+	\end{definit}
+
+	Три cвойства свертки:
+
+	\begin{theorem}[ Коммутативность свертки ]
+		\begin{equation}
+    			f * g = g * f
+		\end{equation}
+
+		\begin{proof}[ Доказательство ]
+  			$$f * g = \int\limits_{-\infty}^{+\infty} f(t')g(t - t')\,dt' = $$ 
+  			делаем замену $ (t') = t - t'' \ , (t - t') = t'' $
+  			$$ = -\int\limits_{-\infty}^{+\infty} g(t'')f(t - t'') \,dt'' = g * f $$
+  			$ y_i = \sum\limits_{k}f_k x_{j - k} $ замена $ f_k = j - p ,\ x_{j - k}  = p $
+		\end{proof}
+
+	\end{theorem}
+
+	\begin{theorem}[ Ассоциативность свертки ]
+		\begin{equation}
+			(x * f) * g = x * (f * g)
+		\end{equation}
+	
+		\begin{proof}[ Доказательство ]
+			$$ \fbox{$ ? $} $$
+		\end{proof}
+	\end{theorem}
+
+	\begin{theorem}[ Дистрибутивность свертки ]
+		\begin{equation}
+			(x * f) + g = x * f + x *g)
+		\end{equation}
+	\end{theorem}
+
+	\begin{definit}[ Передаточная функция фильтра f ]
+		$y = f * x$ ,если непрерывный случай
+		\begin{equation}
+			T(\omega) = \int\limits_{-\infty}^{+\infty} f(t)e^{- i \omega t}\,dt
+		\end{equation}
+
+		дискретный случай 
+
+		\begin{equation}
+			T(\phi) = \sum\limits_{k} f_k e^{-i \phi k}
+		\end{equation}
+
+	\end{definit}
+
+	\begin{definit}[ Передаточная функция комплексно значная ]
+		$$\vert T\vert - {АЧХ(AFC)}$$
+		arg T - ФЧХ(фазовая частотная характеристика).
+	\end{definit}
+
+	\begin{definit}[ f - симметричный(нульфазовый)фильтр ]
+		\begin{equation}
+			f(-t) = f(t)
+		\end{equation}
+		$ f_{-k} = f_k. $
+	\end{definit}
+	
+	\begin{definit}[ f - причинный фильтр ]
+		Если $ f(t) = 0 {при}  t < 0 $ и $ f_{k} = 0 {при} k < 0. $
+	\end{definit}
+	
+	\begin{definit}[ f - финитный фильтр ]
+		$$ f(t) = 0 \text{ при } \forall \vert j\vert > I (FIR) $$
+		$$ f_{k} = 0\text { при } k < 0. $$
+	\end{definit}
+	
+	Упражнения: 
+	\begin{enumerate}
+		\item Доказать ассоциативность: $f*(g*h)=(f*g)*h$
+		\item Доказать дистрибутивность:$(f_1+f_2)*g=(f_1*g)+(f_2*g)$, если $(f_1*g)$ и $(f_2*g)$ существуют
+	\end{enumerate}
+
+	Таблица для запоминания
+
+	\begin{eqnarray*}
+		F[f] & = & \widehat{f} \\
+		F[f(x+a)] & = & e^{iwa}\widehat{f}(\omega) \\
+		F[f(\frac{x}{c})]& = & |c|\widehat{f}(c\omega) \\
+		F[f'] &= & -i\omega \widehat{f}(\omega) \\
+		F[xf(x)]& = & -i\tilde{f} \\
+		F[f*g] & = & \hat{f}-\hat{g} 
+	\end{eqnarray*}
+
+	\section{Ряд Фурье}
+	Ряд Фурье - представление произвольной функции $f$ с периодом $\tau$ в виде ряда
+	\begin{equation}
+	 f(x) = \frac{a_0}{2} + \sum\limits_{k=1}^{+\infty}A_k cos(2\pi \frac{k}{\tau}x + \theta_k)
+	\end{equation}
+	Этот ряд может быть также переписан в виде
+	\begin{equation}
+		f(x) = \sum\limits_{k=-\infty}^{+\infty}\hat{f_k}e^{i2\pi\frac{k}{\tau}x}
+	\end{equation}
+	где
+	\begin{description}
+		\item $A_k$ - амплитуда $k$-го гармонического колебания,
+		\item $2\pi\frac{k}{\tau} = k\omega$ - круговая частота гармонического колебания,
+		\item $\theta_k$ - начальная фаза $k$-го полебания,
+		\item $\hat{f_k}$- $k$-я комплексная амплитуда.
+	\end{description}
+
+	\chapter{Глава 2}
+	%%дискретный случай
+	%%	\begin{equation}
+	%%		y_i = \sum\limits_{k}f_k x_{j - k}
+	%%	\end{equation}
+	\section{Обобщенные функции, обобщенное преобразование Фурье}
+
+	\begin{definit} [ Простравнство Шварца ] 
+		Функция $y$ принадлежит
+		 пространству Шварца $\mathfrak L$, если $y \in C^{\infty}(\mathbb R)$ и
+		$ x^p\ y^{(k)}(x)\rightarrow0$ при
+		$\ x\rightarrow\pm\infty\ $ для всех целых
+		неотрицательных $p$ и $k$.
+	\end{definit}
+		\begin{equation}
+			y\in Z \Leftrightarrow \varphi \in e^\infty(R)
+		\end{equation}
+		$ x^p\ y^{(k)}(x)\rightarrow0,
+		\ x\rightarrow\pm\infty\ \forall p>0,\ \forall k=0,1,2... $
+	\begin{example}
+		$ e^{-x^2}\in \mathfrak L $ 
+	\end{example}
+
+	\begin{theorem}
+	$ Y \in \mathfrak L \Rightarrow $ 
+		\begin{enumerate}
+			\item $ y \in \mathfrak L  $
+			\item $ x\varphi(x)\in \mathfrak L $
+			\item $ F[y]\in \mathfrak L $
+		\end{enumerate}
+	\end{theorem}
+
+	\begin{definit} [ сходимость в $ \mathfrak L $ ]
+		\begin{equation}
+			\phi_k \rightarrow в \mathfrak L,\ 
+			\ k \rightarrow\infty 
+			\Leftrightarrow 
+			x^p \phi^{(j)}_k (x)\rightrightarrows 
+			x^p \phi^{(j)} (x),
+		\end{equation}
+		$ \forall p,j = 0,1,2,...$
+	\end{definit}
+
+	\begin{theorem}
+		Если $\phi_k\rightarrow \phi$ в $\mathfrak L$, то
+ 
+		\begin{enumerate}
+			\item можно переход к lim под знаком произведения $\phi'_k \rightarrow \phi'$
+			\item если умножить на x ,то $\phi_k x \rightarrow \phi x$
+			\item $F[\phi_k]\rightarrow F[\phi]$ можно переходить к преобразованию 
+			Фурье под знаком предела.
+		\end{enumerate}
+	
+	\end{theorem}
+
+	\begin{definit} [ обобщенная функция ]
+		Это линейный непрерывный функционал на пространстве Шварца($\mathfrak L$).
+		$$\mathfrak L'\colon \mathfrak L \rightarrow R$$ или $$\mathfrak L \colon \mathfrak L \rightarrow C ,$$
+		\begin{equation}
+			(f,\phi) = \int\limits_{-\infty}^{+\infty} f(x) \phi (x)\,dx
+		\end{equation}
+		$f\in \mathfrak L'\qquad
+		\phi \in \mathfrak L$
+		непрерывность - если $\phi_k \rightarrow \phi \quad$в $\mathfrak L \Rightarrow (f , \ \phi_k)\rightarrow (f,\phi)$
+		$\forall f \in \mathfrak L'.$
+	\end{definit}
+
+	\begin{theorem}
+	Если 
+	\begin{equation}
+	 	\int\limits_{-\infty}^{+\infty}\frac{\vert f(x)\vert \,dx}{1 + x^p}< +\infty,
+	\end{equation}
+
+	где p-степень x $(\exists p)\in N$ \\
+	такие функции - функции локальные непрерывного роста $\Rightarrow f \in Z'.$
+	\end{theorem}
+
+	\begin{definit} [ слабая сходимость в пространстве $Z'$ обобщенной функции]
+		\begin{equation}
+			f_k \rightarrow f \qquad \text{ в } Z' \Leftrightarrow (f_k , \phi )\rightarrow (f , \phi)
+		\end{equation}
+		если выполняется $\forall \phi \in Z.$
+	\end{definit}
+
+	\begin{definit}
+		\begin{equation}
+			f \in Z' \quad , f = 0 text{на} ]a,b[ \Leftrightarrow (f ,\phi) = 0 
+		\end{equation}
+
+		$\forall \phi \in Z \colon \phi (x) = 0\qquad,\forall x [a,b]  \Rightarrow$\\
+		вырезаем поведение функции на этом интервале
+		\begin{equation}
+			supp f = R  \{U ]a,b[ \colon f = 0 text{на} ]a,b[\}\ f \in Z'.
+		\end{equation}
+
+	\end{definit}
+
+	формулы
+	$$\fbox{$\delta(c x) = \frac{1}{\vert c \vert} \delta(x)$}$$
+	$$\fbox{$(f(c(x - x_0)),\phi(x)) = \frac{1}{\vert c \vert}(f(x,\phi \frac{x +x_0}{c}))$}$$
+	$$\fbox{$(x f(x),\phi(x)) = (f(x),x \phi(x))$}$$
+	$$\fbox{$x \delta'(x) = -\delta(x)$} \ \forall \phi \in Z.$$
+	$$\fbox{$\sum\limits_{k = -\infty}^{\infty}e^{i k \omega} = 2\pi\sum\limits_{-\infty}^{\infty}\delta(\omega - 2 \pi p)$}$$
+
+	\begin{definit} [ Обобщенное произведение ]
+
+		\begin{equation}
+			\fbox{$(f',\phi) = -(f,\phi')$}\ f \in Z',\phi \in Z.
+		\end{equation}
+
+	\end{definit}
+
+	\begin{theorem}
+		\begin{equation}
+			f_k \rightarrow f text{в} Z' \Rightarrow f'_k \rightarrow f'
+		\end{equation}
+		 в Z' функции все обобщенные - бесконечно дифференцированные.
+
+		\begin{proof}[ Доказательство ]
+			 $ (f'_k , \phi) = -(f_k ,\phi')\rightarrow -(f ,\phi') = (f' ,\phi),\ \forall \phi \in Z. $
+		\end{proof}
+
+	\end{theorem}
+
+	\begin{definit} 
+
+	Сумма бесконечного ряда - предел последовательности частичной суммы этого ряда.
+	\end{definit}
+
+	\begin{definit}[ Обобщенное произведение Фурье ] 
+
+		\begin{equation}
+			\fbox{$ (F[f] ,u) = (f ,F[\phi]) $}
+		\end{equation}
+		выполняется для $ f \in Z' ,\phi \in Z. $
+	\end{definit}
+
+	\begin{theorem}
+		\begin{equation}
+			F^{-1}[F[f]] = F[F^{-1}[f]] = f ,
+		\end{equation}
+
+		$\forall f \in Z'. $
+		\begin{proof}[ Доказательство ]
+
+			Надо рассмотреть скалярное произведение
+			\begin{equation}
+				\forall \phi \in Z \ (F^{-1}[F[f]] , u) = (F[f] ,F^{-1}[\phi]) = (f , F[F^{-1}[\phi]]) = (f ,\phi) . 
+			\end{equation}
+
+		\end{proof}
+
+	\end{theorem}
+
+	Формулы
+
+	$$\fbox{$ \delta (x) = F^{-1}[1] = \frac{1}{2\pi}\int\limits_{-\infty}^{+\infty} e^{-i \omega x} d\omega $}$$
+	$$\fbox{$ \frac{2 \sin \Omega x}{x} \rightarrow_{x' , \Omega \rightarrow=\infty} 2\pi \delta(x) $}$$
+
+	Свойства
+
+	Преобразование Фурье от произведения
+	$ F[f' (x)](x) = $ рассмотрим скалярное произведение
+
+	$ (F[f' (x)](\omega) ,\phi(\omega)) = (f'(x) ,F[\phi (\omega)](x)) = (f'(x) \\,\int\limits_{-\infty}^{+\infty} e^{i \omega x}\phi (\omega) d\omega) = -(f(x) \\,(\int\limits_{-\infty}^{+\infty} e^{i \omega x}\phi (\omega) d\omega)') = -(f(x) \\,\int\limits_{-\infty}^{+\infty} \phi (\omega) i \omega e^{i \omega x} d\omega) = \\-(f(x) , F[i \omega \phi (\omega)](x)) = -(F[f(x)](\omega), i\omega \\\phi(\omega)) = (-i \omega F[f(x)(\omega) ,\phi(\omega)]) \Rightarrow $
+
+	\begin{theorem}
+	$ F[f'](\omega) = -i \omega F[f](\omega) $ получим
+	\end{theorem}
+
+	\begin{theorem}
+		$ F[x^p f(x)] = \fbox{?} $
+	\end{theorem}
+
+	\begin{theorem}
+		$ F[x^p f(\frac{x - a}{c})] = \fbox{?} $
+	\end{theorem}
+
+	Главные формулы:
+
+	$$ \int\limits_{-\infty}^{+\infty} \phi(x')\delta(x - x') \,dx' = \phi(x) $$ - интеграл Дюамеля
+	$$ \int\limits_{-\infty}^{+\infty} e^{i x y} \,dx = 2\pi \delta(y) $$
+	$$ \sum\limits_{k = -\infty}^{+\infty} e^{i k x} = 2\pi \sum\limits_{p = -\infty}^{+\infty}\delta(x - 2\pi p) $$ - формула суммирования Пуассона
+	$$ \int\limits_{-\infty}^{+\infty}\vert \phi(x)\vert^2 \,dx = frac{1}{2\pi}\int\limits_{-\infty}^{+\infty}\vert \widehat{\phi}(\omega)\vert^2 d\omega $$ - равенство Парсеваля
+
+	\begin{definit}[ Свертка обобщенной функции  ] 
+		\begin{equation}
+			(f * g ,\phi) = (f(x)g(y) ,\phi(x + y)) = (f(x) ,(g(y),\phi(x + y)))
+		\end{equation}
+		
+		\begin{gather*}
+			(f * g ,\phi) = \int\limits_{-\infty}^{+\infty}(\int\limits_{-\infty}^{+\infty} f(x')g(x - x')\,dx')\phi(x)\,dx = \\
+			[\text{ делаем замену } (x - x') = y\ (x) = y + x'\ ] \\
+			= \int\limits_{-\infty}^{+\infty}\int\limits_{-\infty}^{+\infty} f(x')g(y) \phi(y + x') \,dx'\,dy = (f(x)g(y) ,\phi (x + y))  \ \fbox{?}
+		\end{gather*}
+		
+	\end{definit}
+	
+	\begin{lemma}[ Шварца ]
+		$ g \in Z' ,\phi \in Z(R^2)\Rightarrow (g(y) ,u(x ,y))\in Z $
+		\begin{proof}[ Доказательство ]
+			 $ \fbox{?} $ следует из следующей теоремы.
+		\end{proof}
+	\end{lemma}
+	
+	\begin{theorem}
+	Если
+		\begin{equation}
+			f \in Z' ,g\in Z' \Rightarrow f * g \in Z'.
+		\end{equation}
+	
+	\end{theorem}
+	
+	\begin{theorem}[ о свертке ]
+		$ f \in Z' ,g\in Z' $ и $ g -$ финитна $\Rightarrow $ финитная функция - это функция с конечным носителем.
+		\begin{equation}
+			\Rightarrow \fbox{$ F[f * g] = F[f][g] $}
+		\end{equation}
+
+		\begin{proof}[ Доказательство ]
+
+			Надо вычислить преобразование фурье свертки.
+			
+			\begin{gather*}
+				(F[f * g] ,\phi ) =_{\forall \phi \in Z} (f * g ,F[\phi]) = \\
+				[ \text{ по определению свертки } ]  \\
+				=(f(x) ,(g(y) , F[\phi](x + y))) = (f(x) ,g(y) ,\int\limits_{-\infty}^{+\infty} \phi (\xi)e^{i \xi (x + y)}d\xi) = \\
+				= (f(x) ,\int\limits_{-\infty}^{+\infty}\int\limits_{-\infty}^{+\infty} g(y)e^{i \xi (x + y)} \phi(\xi) d\xi \,dy) = \\
+				(f , F[\phi(\xi)F[g](\xi)]) = (F[f] ,\phi F[g]) = \\
+			\end{gather*}
+			т.к. g - финитна, то $ F[g] = C^{\infty} $ а такую функцию можно переименовать в скалярное произведение из левой в правую
+			$ = (F[f]F[g] ,\phi) $
+		\end{proof}
+	
+	\end{theorem}
+	
+	\begin{theorem}[ Отсчетов ]
+		Если наша функция 
+		\begin{equation}
+			f(x) =\frac{1}{2\pi}\int\limits_{-\infty}^{+\infty} \widehat{f}(\omega)e^{- i \omega x}d\omega
+		\end{equation}
+		представляет интеграл фурье и это преобразование имеет конечный носитель $ \widehat{f}(\omega) = 0 $ при $ \vert \omega \vert > \frac{\pi}{\Delta} $ - частота Найквиста
+		\begin{equation}
+			\Rightarrow \fbox{$ \frac{\Delta}{\pi}\sum\limits_{k = -\infty}^{+\infty}f(k \delta)\frac{\sin\pi(x - k\delta)/\delta}{(x - k\delta)} = f(x)_{x\in R} $}
+		\end{equation}
+	
+	\end{theorem}
+	
+	\begin{definit}[ Дискретная cвертка ] 
+		\begin{equation}
+			 y_k = (f * x)_k \equiv \sum\limits_{j = -\infty}^{+\infty}f_j x_{k - j} ,\ k\in Z
+		\end{equation}
+	
+		$$ x\in L_2 \Leftrightarrow \sum\limits_{j = -\infty}^{+\infty} \vert x_j \vert^{2} < +\infty .$$
+	\end{definit}
+
+	%\begin{definit}[ $ \delta $ функция ] 
+
+	Пусть $ x_j - $символ Кронекера
+	
+	%$$ x_j = \delta_{j} = $$
+	%\left \{\begin{array}
+	
+	%1,\qquad j = 0\\
+	%0,\qquad j\neq 0
+	%\end{equation}.\eqno (3.18)$$- т.е.короткий еденичный импульс
+	
+	$$ (f * x)_k = \sum\limits_{j} f_j x_{k - j} = f_k $$
+	
+	%$$\left\{\begin{array} \eqno (1,\qquad j = 0)\\ \eqno (0,\qquad j\neq 0)\end{array}$$
+	
+	
+	\begin{definit}[ Передаточная функция ] 
+		\begin{equation}
+			T(\phi) = \sum\limits_{j = -\infty}^{+\infty} f_j e^{i j \phi}
+		\end{equation}
+		\begin{gather*}
+			-\pi \leq \phi \leq \pi \\
+			T(\phi + 2\pi) = T(\phi) .
+		\end{gather*}
+	\end{definit}
+	
+	\begin{theorem}
+		\begin{equation}
+			x_j = e^{- i j \phi}\Rightarrow (f * x)_k  = x_k T(\phi)
+		\end{equation}
+	
+		\begin{proof}[ Доказательство ]
+
+			$$ (f * x)_k = \sum\limits_{j = -\infty}^{+\infty} f_j e^{-i \phi(k - j)} = e^{-i \phi(k - j)}\sum\limits_{j = -\infty}^{+\infty} f_j e^{i j \phi} = x_k T(\phi). $$
+		\end{proof}
+	\end{theorem}
+
+	\begin{theorem}
+		\begin{equation}
+			f_k = \frac{1}{2\pi}\int\limits_{-\pi}^{\pi}T(\phi) e^{-i k \phi} d\phi
+		\end{equation}
+	
+	\end{theorem}
+	
+	\begin{definit}[ Дискретное преобразование фурье ] 
+		\begin{equation}
+			\widehat{f}_k = \sum\limits_{j = 0}^{n - 1}f_j e^{i 2 \pi j k/n}
+		\end{equation}
+		$ k = 0,1,2,...  \ n $- длина сигнала.
+		
+		$ \widehat{f}_{k + n} = \widehat{f}_k. $
+	\end{definit}
+	
+	\begin{theorem}
+		\begin{equation}
+			f_j = \frac{1}{N} \sum\limits_{k = 0}^{n - 1} \widehat{f}_k e^{-i 2 \pi j k /n}
+		\end{equation}
+	\end{theorem}
+	
+	\begin{definit}[ Циклическая свертка ] 
+	
+		Для выборки из n элементов
+		\begin{equation}
+			 (f * x)_k = \sum\limits_{j = 0}^{n - 1}f_{(j + n)mod_n} x_{(k - j)mod_n}
+		\end{equation}
+		
+		$ k = 0,1,2,... $
+	\end{definit}
+	
+	\begin{theorem}
+		\begin{equation}
+			DFT[f * x] = DFT[f] DFT[x].
+		\end{equation}
+		
+		\begin{proof}[ Доказательство ]
+			подствновкой $ \fbox{$ ? $} $
+		\end{proof}
+	\end{theorem}
+	
+	\chapter{Глава 3}
+	\section{ Адаптивный фильтр, сигнал и помеха, винеревские фильтры }
+	
+	\begin{definit}[ Взаимная ковариация(корреляция) ] 
+		$$ C_{u,v}(h) = \int\limits_{-\infty}^{+\infty}u^{*}(x)v(x + h)\,dx $$
+		нормированная ковариация - если это разделим на норму этих векторов.
+		
+		автоковариация - 
+		
+		$$ A_u(h) = C_{u,u}(h) = \int\limits_{-\infty}^{+\infty}u^{*}u(x + h)\,dx. $$
+	\end{definit}
+	
+	\begin{theorem}
+		вычислим преобразование фурье от взаимной ковариации
+		
+		$$ F[C_{u,v}(h)] = \int\limits_{-\infty}^{+\infty}C_{u,v}(h)e^{i \omega h} dh = \int\limits_{-\infty}^{+\infty}\int\limits_{-\infty}^{+\infty} u^x(x)v(x + h) \,dx e^{i \omega h} dh = $$
+		$$ = \int\limits_{-\infty}^{+\infty}\int\limits_{-\infty}^{+\infty} u^{*}(x)v(y) \,dx e ^{i \omega (y - x)} \,dy = \widetilde{v}(\omega)(\widetilde{u}(\omega))^{*}. $$
+		
+	\end{theorem}
+	
+	\begin{definit}[ Стационарный случайный процесс  U(t) ] 
+	
+		M - математическое ожидание
+		$$ M[u(t)] = 0  ,\ M[u^{*}(t)u(t + h)] = a(h) $$ не зависит от t
+		
+		Эргодичность - усреднение по реализации совпадает с усредднением по аргументу(взаим.ков.)
+		
+		$$ M[u^{*}(t)u(t + h)] = \lim_{b\to +\infty} \frac{1}{2\pi}\int\limits_{-b}^{b}u^{*}(t)u(t + h) \,dt. $$
+	\end{definit}
+	
+	\begin{definit}[ Белый шум ] 
+		$$ A_R(t ,h) = M[u(t)u^{*}(t + h)] = A_R(h) $$
+		$$ n(t) = \Leftrightarrow A_R(h) = 0  \ \forall h \notin 0 $$
+	\end{definit}
+	
+	Окрашенный шум = фильтр * белый шум
+	
+	* - свернуть с ...
+	
+	\begin{definit}[ Винеревский формирующий фильтр ] 
+	
+		u,v - даны сигналы
+		f - ?
+		
+		$ f * v  \approx v $- к фильтру применим u получим v
+		
+		МНК(LSM) берем норму и минимизируем по фильтру f
+		
+		$$ \fbox{$ \Vert f * u \Vert \rightarrow \min_{f} $} $$ 
+		
+		...
+		\end{definit}
+	
+	\begin{theorem}
+		
+		"Оптимальный фильтр" при котором сигнал u(t) и шум n(t) не коррелированный.
+		
+		$$ \widehat{f}(\omega) = \frac{\vert \widehat{u}(\omega)\vert^{2}}{\vert \widehat{u}(\omega)\vert^{2} + \vert \widehat{n}(\omega)\vert^{2}}. $$
+		
+	\end{theorem}
+	
+	\section{ Минимально-фазовые фильтры. Обратные фильтры }
+	
+	\begin{definit}[ Z - преобразование ] 
+	
+		если есть $ \{f_k\}  ,\ k\in Z $
+		\item $ Z[]f $ превращение
+		\item $ Z[f](z) = \sum\limits_{k = -\infty}^{+\infty} f_k Z^k  ,\ z\in C $
+		\item $ Z[f] = 0 $ - характеристическое уравнение для f.
+	\end{definit}
+	
+	\begin{theorem}
+		$$ Z[f *g] = Z[f]g[z] $$
+		\begin{proof}[ Доказательство ]
+			$$ \sum\limits_{k}(f * g)_k z^k = \sum\limits_{k}(\sum\limits_{j} f_j g_{k - j})z^k  = \sum\limits_{k}(\sum\limits_{j}f_j g_{k - j})z^{k - j}z^{j} =$$
+			$$ = \sum\limits_{k}(\sum\limits_{j}f_j z^j) g_{k - j}z^{k - j} = Z[f]g[z]. $$
+		\end{proof}
+	\end{theorem}
+	
+	\begin{theorem}
+		Фильтр длины n+1 равен свертке n (двухточный фильтр) "диполей".
+		\begin{proof}[ Доказательство ]
+			Рассмотрим 
+			$$ Z[f] = \sum\limits_{k = 0}^{n}f_k Z^k = f_n \prod _{j = 1}^{n}(z - z_j). $$
+			если возмем фильтр 
+			$ Z[(-z_j , 1)] = -z_j + 1 Z \Rightarrow f $ через корни характеричтического многочлена выражается как
+			$ f = f_n (-z_1 ,1)*(-z_2 , 1)*...*(-z_n ,1) $
+		\end{proof}
+	\end{theorem}
+	
+	\begin{definit}
+	
+	Диполь (a.b) называется min-фазовым, если $ \vert a\vert >\vert b\vert. $
+	
+	Фильтр называется min-фазовым, если он свертка минимально - фазовых диполей.
+	\end{definit}
+	
+	\begin{theorem}[ Робинсона ]
+	
+		Если  $ \vert T_f(\phi)\vert  = \vert T_g(\phi)\vert $
+		
+		рассмотрим 2 фильтра f и g , у них одинаковые амплитудные спектры
+		
+		f - мин-фазовый
+		
+		оба фильтра причинные, т.е. нумерация с 0 $ \Rightarrow \sum\limits_{k = 0}^{l}\vert f_k\vert^{2} \geq \sum\limits_{k = 0}^{l}\vert g_k\vert^{2}  \ \forall l $
+		
+	\end{theorem}
+	
+	\begin{theorem}[ Колмагорова ]
+	
+		Если  f - причинный, мин-фазовый фильтр, то аргумент его передаточной функции выражается через
+		$$ arg T_f(\phi) = \frac{1}{2\pi}\int\limits_{-\pi}^{\pi}\ln\vert T(\phi')\vert \frac{\phi' - \phi}{2}d \phi' $$
+		
+	\end{theorem}
+	
+	
+\end{document}
