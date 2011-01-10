@@ -69,8 +69,8 @@
 	Гармонический анализ 
 	\begin{enumerate}
 		\item (фурье)-> ДПФ
-		\item ДПФ-дискретное преобразование фурье
-		\item БПФ-быстрое преобразование фурье
+		\item ДПФ --дискретное преобразование фурье
+		\item БПФ--быстрое преобразование фурье
 	\end{enumerate}
 	
 	\section{Элементы функционального анализа}
@@ -272,7 +272,7 @@
 	\newline\newline\newline
 	
 	\section{Комплексные числа.}
-	Комплексные числа - расширение множества вещественных чисел, 
+	Комплексные числа -- расширение множества вещественных чисел, 
 	обычно обозначается $\mathbb{C}$. Каждое комплексное число z 
 	представляет собой сумму $x+iy$, где $x$ и $y$ вещественные, 
 	а $i$ это так называемая мнимая единица, являющейся корнем 
@@ -284,7 +284,7 @@
 		\label{ris:Complex1}
 	\end{figure}
 	
-	Комплексное число $z$ - это упорядоченная пара
+	Комплексное число $z$ -- это упорядоченная пара
 	$$ z=(x,y)$$
 	или, что тоже самое, комплекс, состоящий из двух вещественных чисел $x$ и $y$:
 	
@@ -311,29 +311,29 @@
 	\begin{equation}
 		e^{ix}=\cos x + i\sin x
 	\end{equation}
-	-где $ i $  мнимая единица.
+	--где $ i $  мнимая единица.
 	\begin{description}
 		\item $ e^{i\pi}= -1 $
 		\item $ \sin x = \frac{e^{ix}-e^{-ix}}{2i} $
 		\item $ \cos x = \frac{e^{ix}+e^{-ix}}{2} $
 	\end{description}
-	\textbf{Функция} - математическое понятие, отражающее связь между элементами различных множеств. 
+	\textbf{Функция} -- математическое понятие, отражающее связь между элементами различных множеств. 
 	В самом общем виде, функция — это «закон», по которому каждому элементу одного множества 
 	(называемому \textbf{областью определения}) ставится в соответствие некоторый элемент 
 	другого множества (называемого \textbf{областью значений}).\\
-	\textbf{Оператор} - отображение, ставящее в соответствие функции другую функцию.
+	\textbf{Оператор} -- отображение, ставящее в соответствие функции другую функцию.
 	Наиболее часто встречающиеся операторы в функциональном анализе: операторы на пространсвах функций
 	(дифференцирование, интегрирование, свертка с ядром, преобразование Фурье).\\
-	\textbf{Функционал} - числовая функция, заданная на векторном пространстве. 
-	Функционал берёт в качестве аргумента элемент линейного пространства (вектор) и возвращает 
+	\textbf{Функционал} -- числовая функция, заданная на векторном пространстве. 
+	Функционал берет в качестве аргумента элемент линейного пространства (вектор) и возвращает 
 	в качестве результата скаляр. Довольно часто в роли линейного пространства выступает то 
 	или иное пространство функций (непрерывные функции на отрезке, интегрируемые функции на 
-	плоскости т. д. Поэтому, неформально говоря, \textit{ функционал - это функция от функций, переводящая 
+	плоскости т. д. Поэтому, неформально говоря, \textit{ функционал -- это функция от функций, переводящая 
 	функцию в число (действительное или комплексное)}.\\
-	\textbf{Носитель функции} $f\,:\, X\,\rightarrow\,\mathbb{R}$  - это замыкание подмножества $X$, на котором 
+	\textbf{Носитель функции} $f\,:\, X\,\rightarrow\,\mathbb{R}$  -- это замыкание подмножества $X$, на котором 
 	вещественнозначная функция $f$ не обращается в ноль:
 	$$ supp \, f =\overline{  \{ x | u(x)\neq 0 \} }  $$
-	\textbf{Финитная функция} - функция носитель которой конечен  $\Leftrightarrow supp \, f \in [a,b]$
+	\textbf{Финитная функция} -- функция носитель которой конечен  $\Leftrightarrow supp \, f \in [a,b]$
 
 	\section{Преобразование Фурье и свертка}
 
@@ -341,7 +341,7 @@
 	\begin{equation}
 		F[f](\omega )\equiv\widehat{f}(\omega )\equiv\int\limits_{-\infty}^{+\infty}f(x)e^{i\omega x}\,dx
 	\end{equation}
-	где $\widehat{f}(\omega )$ - спектор, $F$ - оператора Фурье.
+	где $\widehat{f}(\omega )$ -- спектор, $F$ -- оператора Фурье.
 
 	Обратное преобразование Фурье 
 	\begin{equation}
@@ -428,21 +428,21 @@
 
 	\begin{definit}[ Передаточная функция комплексно значная ]
 		$$\vert T\vert - {АЧХ(AFC)}$$
-		arg T - ФЧХ(фазовая частотная характеристика).
+		arg T -- ФЧХ(фазовая частотная характеристика).
 	\end{definit}
 
-	\begin{definit}[ f - симметричный(нульфазовый)фильтр ]
+	\begin{definit}[ f -- симметричный(нульфазовый)фильтр ]
 		\begin{equation}
 			f(-t) = f(t)
 		\end{equation}
 		$ f_{-k} = f_k. $
 	\end{definit}
 	
-	\begin{definit}[ f - причинный фильтр ]
+	\begin{definit}[ f -- причинный фильтр ]
 		Если $ f(t) = 0 {при}  t < 0 $ и $ f_{k} = 0 {при} k < 0. $
 	\end{definit}
 	
-	\begin{definit}[ f - финитный фильтр ]
+	\begin{definit}[ f -- финитный фильтр ]
 		$$ f(t) = 0 \text{ при } \forall \vert j\vert > I (FIR) $$
 		$$ f_{k} = 0\text { при } k < 0. $$
 	\end{definit}
@@ -465,7 +465,7 @@
 	\end{eqnarray*}
 
 	\section{Ряд Фурье}
-	Ряд Фурье - представление произвольной функции $f$ с периодом $\tau$ в виде ряда
+	Ряд Фурье -- представление произвольной функции $f$ с периодом $\tau$ в виде ряда
 	\begin{equation}
 	 f(x) = \frac{a_0}{2} + \sum\limits_{k=1}^{+\infty}A_k cos(2\pi \frac{k}{\tau}x + \theta_k)
 	\end{equation}
@@ -475,10 +475,10 @@
 	\end{equation}
 	где
 	\begin{description}
-		\item $A_k$ - амплитуда $k$-го гармонического колебания,
-		\item $2\pi\frac{k}{\tau} = k\omega$ - круговая частота гармонического колебания,
-		\item $\theta_k$ - начальная фаза $k$-го полебания,
-		\item $\hat{f_k}$- $k$-я комплексная амплитуда.
+		\item $A_k$ -- амплитуда $k$-го гармонического колебания,
+		\item $2\pi\frac{k}{\tau} = k\omega$ -- круговая частота гармонического колебания,
+		\item $\theta_k$ -- начальная фаза $k$-го полебания,
+		\item $\hat{f_k}$-- $k$-я комплексная амплитуда.
 	\end{description}
 
 	\chapter{Глава 2}
@@ -501,11 +501,11 @@
 		$ x^p\ y^{(k)}(x)\rightarrow0,
 		\ x\rightarrow\pm\infty\ \forall p>0,\ \forall k=0,1,2... $
 	\begin{example}
-		$ e^{-x^2}\in \mathfrak L $ 
+		Функция $y = e^{-x^2}$ принадлежит пространству Шварца $\mathfrak L $. 
 	\end{example}
 
 	\begin{theorem}
-	$ Y \in \mathfrak L \Rightarrow $ 
+	Пусть $Y$ принадлежит пространству Шварца $\mathfrak L $, тогда
 		\begin{enumerate}
 			\item $ y \in \mathfrak L  $
 			\item $ x\varphi(x)\in \mathfrak L $
@@ -514,22 +514,19 @@
 	\end{theorem}
 
 	\begin{definit} [ сходимость в $ \mathfrak L $ ]
+		Последовательность функций $\phi_k$ cходится к $\phi$ в пространстве $ \mathfrak L $, при $k\rightarrow +\infty$, тогда и только тогда, когда
 		\begin{equation}
-			\phi_k \rightarrow в \mathfrak L,\ 
-			\ k \rightarrow\infty 
-			\Leftrightarrow 
-			x^p \phi^{(j)}_k (x)\rightrightarrows 
-			x^p \phi^{(j)} (x),
+			x^p \phi^{(j)}_k (x)\rightrightarrows x^p \phi^{(j)} (x),\  \forall p,j = 0,1,2,...
 		\end{equation}
-		$ \forall p,j = 0,1,2,...$
+		
 	\end{definit}
 
 	\begin{theorem}
-		Если $\phi_k\rightarrow \phi$ в $\mathfrak L$, то
+		Если последовательность функций $\phi_k$ стремится к $\phi$ в $\mathfrak L$, то
  
 		\begin{enumerate}
-			\item можно переход к lim под знаком произведения $\phi'_k \rightarrow \phi'$
-			\item если умножить на x ,то $\phi_k x \rightarrow \phi x$
+			\item можно перейти к пределам, под знаком производой $\phi'_k \rightarrow \phi'$
+			\item если умножить на x, то $\phi_k x \rightarrow \phi x$
 			\item $F[\phi_k]\rightarrow F[\phi]$ можно переходить к преобразованию 
 			Фурье под знаком предела.
 		\end{enumerate}
@@ -538,14 +535,14 @@
 
 	\begin{definit} [ обобщенная функция ]
 		Это линейный непрерывный функционал на пространстве Шварца($\mathfrak L$).
-		$$\mathfrak L'\colon \mathfrak L \rightarrow R$$ или $$\mathfrak L \colon \mathfrak L \rightarrow C ,$$
+		$$\mathfrak L'\colon \mathfrak L \rightarrow \mathbb{R}$$ или $$\mathfrak L \colon \mathfrak L \rightarrow \mathbb{C} ,$$
 		\begin{equation}
-			(f,\phi) = \int\limits_{-\infty}^{+\infty} f(x) \phi (x)\,dx
+			(f,\phi) = \int\limits_{-\infty}^{+\infty} f(x) \phi(x)\,dx
 		\end{equation}
-		$f\in \mathfrak L'\qquad
-		\phi \in \mathfrak L$
-		непрерывность - если $\phi_k \rightarrow \phi \quad$в $\mathfrak L \Rightarrow (f , \ \phi_k)\rightarrow (f,\phi)$
-		$\forall f \in \mathfrak L'.$
+		-- где $f\in \mathfrak L',\ \phi \in \mathfrak L$.
+
+		Непрерывность -- если $\phi_k$ cходится к $\phi$ в пространстве $\mathfrak L$, то $(f ,\phi_k)$ содится к $(f,\phi)$
+		для всех $f$ принадлижащих пространству $\mathfrak{L}'$.
 	\end{definit}
 
 	\begin{theorem}
@@ -554,26 +551,29 @@
 	 	\int\limits_{-\infty}^{+\infty}\frac{\vert f(x)\vert \,dx}{1 + x^p}< +\infty,
 	\end{equation}
 
-	где p-степень x $(\exists p)\in N$ \\
-	такие функции - функции локальные непрерывного роста $\Rightarrow f \in Z'.$
+	где cуществует такое $p$ принадлежащее $\mathbb{N}$, такие функции называются функциями непрерывного локального роста, 
+	следовательно $f$ принадлежит $\mathfrak{L}'$.
 	\end{theorem}
 
-	\begin{definit} [ слабая сходимость в пространстве $Z'$ обобщенной функции]
-		\begin{equation}
-			f_k \rightarrow f \qquad \text{ в } Z' \Leftrightarrow (f_k , \phi )\rightarrow (f , \phi)
-		\end{equation}
-		если выполняется $\forall \phi \in Z.$
+	\begin{definit} [ слабая сходимость в пространстве $\mathfrak{L}'$ обобщенной функции]
+
+		Пусть $f_k$ сходится к $f$ в пространстве $\mathfrak{L}'$, тогда $(f_k,\phi)$ 
+		сходится к $(f,\phi)$, если каждое $\phi$ принадлежит $\mathfrak{L}$.
+
 	\end{definit}
 
 	\begin{definit}
-		\begin{equation}
-			f \in Z' \quad , f = 0 text{на} ]a,b[ \Leftrightarrow (f ,\phi) = 0 
-		\end{equation}
 
-		$\forall \phi \in Z \colon \phi (x) = 0\qquad,\forall x [a,b]  \Rightarrow$\\
-		вырезаем поведение функции на этом интервале
+		Пусть $f$ принадлежит пространству $\mathfrak{L}'$ и $f=0$ на $]a,b[$, тогда $(f,\phi)=0$
+		для любого $\phi$ из пространства $\mathfrak{L}$, такого что $\phi(x)=\phi$ для любого $x$ 
+		не принадлежащему отрезку $[a,b]$
+		
 		\begin{equation}
-			supp f = R  \{U ]a,b[ \colon f = 0 text{на} ]a,b[\}\ f \in Z'.
+			\int\limits_{-\infty}^{+\infty}\delta(x)\phi(x)\,dx=\phi(0)
+		\end{equation}
+		Носитель функции:
+		\begin{equation}
+			supp\ f = R  \{U \ ]a,b[\ \colon f = 0 \text{ на } ]a,b[\}\ f \in Z'.
 		\end{equation}
 
 	\end{definit}
@@ -585,19 +585,29 @@
 	$$\fbox{$x \delta'(x) = -\delta(x)$} \ \forall \phi \in Z.$$
 	$$\fbox{$\sum\limits_{k = -\infty}^{\infty}e^{i k \omega} = 2\pi\sum\limits_{-\infty}^{\infty}\delta(\omega - 2 \pi p)$}$$
 
-	\begin{definit} [ Обобщенное произведение ]
+	\begin{definit} [ Обобщенная производная ]
 
 		\begin{equation}
-			\fbox{$(f',\phi) = -(f,\phi')$}\ f \in Z',\phi \in Z.
+			\fbox{$(f',\phi) = -(f,\phi')$}
 		\end{equation}
+		Тогда и только тогда, когда $f$ принадлижит пространств $\mathfrak{L}'$, а $\phi$
+		из $\mathfrak{L}$.
 
 	\end{definit}
+	
+	\begin{example}
+		$ \int\limits_{-\infty}^{+\infty}f'(x)\phi(x)\,dx = f(x)\phi(x) |_{-\infty}^{+\infty} 
+		 - \int\limits_{-\infty}^{+\infty}f(x)\phi '(x)\,dx$
+	\end{example}
 
 	\begin{theorem}
+	
+		Пусть последовательность функций $f_k$ cходится к функции $f$ в пространстве $\mathfrak{L}'$, 
+		тогда и их производные тоже сходятся. 
 		\begin{equation}
-			f_k \rightarrow f text{в} Z' \Rightarrow f'_k \rightarrow f'
+			f'_k \rightarrow f'
 		\end{equation}
-		 в Z' функции все обобщенные - бесконечно дифференцированные.
+		 в $\mathfrak{L}'$ функции все обобщенные -- бесконечно дифференцированные.
 
 		\begin{proof}[ Доказательство ]
 			 $ (f'_k , \phi) = -(f_k ,\phi')\rightarrow -(f ,\phi') = (f' ,\phi),\ \forall \phi \in Z. $
@@ -607,23 +617,22 @@
 
 	\begin{definit} 
 
-	Сумма бесконечного ряда - предел последовательности частичной суммы этого ряда.
+	Сумма бесконечного ряда -- предел последовательности частичной суммы этого ряда.
 	\end{definit}
 
-	\begin{definit}[ Обобщенное произведение Фурье ] 
+	\begin{definit}[ Обобщенное преобразование Фурье ] 
 
 		\begin{equation}
-			\fbox{$ (F[f] ,u) = (f ,F[\phi]) $}
+			\fbox{$ (F[f] ,\phi) = (f ,F[\phi]) $}
 		\end{equation}
-		выполняется для $ f \in Z' ,\phi \in Z. $
+		выполняется когда $f$ из пространства $\mathfrak{L}'$, а $\phi$ из $\mathfrak{L}$.
 	\end{definit}
 
 	\begin{theorem}
 		\begin{equation}
 			F^{-1}[F[f]] = F[F^{-1}[f]] = f ,
 		\end{equation}
-
-		$\forall f \in Z'. $
+		для любой функции $f$ из $\mathfrak{L}'$.
 		\begin{proof}[ Доказательство ]
 
 			Надо рассмотреть скалярное произведение
@@ -645,7 +654,9 @@
 	Преобразование Фурье от произведения
 	$ F[f' (x)](x) = $ рассмотрим скалярное произведение
 
-	$ (F[f' (x)](\omega) ,\phi(\omega)) = (f'(x) ,F[\phi (\omega)](x)) = (f'(x) \\,\int\limits_{-\infty}^{+\infty} e^{i \omega x}\phi (\omega) d\omega) = -(f(x) \\,(\int\limits_{-\infty}^{+\infty} e^{i \omega x}\phi (\omega) d\omega)') = -(f(x) \\,\int\limits_{-\infty}^{+\infty} \phi (\omega) i \omega e^{i \omega x} d\omega) = \\-(f(x) , F[i \omega \phi (\omega)](x)) = -(F[f(x)](\omega), i\omega \\\phi(\omega)) = (-i \omega F[f(x)(\omega) ,\phi(\omega)]) \Rightarrow $
+	$ (F[f' (x)](\omega) ,\phi(\omega)) = (f'(x) ,F[\phi (\omega)](x)) = (f'(x) \, \int\limits_{-\infty}^{+\infty} e^{i \omega x}\phi (\omega)\,d\omega) = \\ 
+	-(f(x) \, (\int\limits_{-\infty}^{+\infty} e^{i \omega x}\phi (\omega)\, d\omega)') = -(f(x)\,\int\limits_{-\infty}^{+\infty} \phi (\omega) i \omega e^{i \omega x}\,d\omega) = \\
+	-(f(x) , F[i \omega \phi (\omega)](x)) = -(F[f(x)](\omega) i\omega \phi (\omega)) = (-i \omega\, F[f(x)(\omega) ,\phi(\omega)]) \Rightarrow $
 
 	\begin{theorem}
 	$ F[f'](\omega) = -i \omega F[f](\omega) $ получим
@@ -661,10 +672,10 @@
 
 	Главные формулы:
 
-	$$ \int\limits_{-\infty}^{+\infty} \phi(x')\delta(x - x') \,dx' = \phi(x) $$ - интеграл Дюамеля
+	$$ \int\limits_{-\infty}^{+\infty} \phi(x')\delta(x - x') \,dx' = \phi(x) $$ -- интеграл Дюамеля
 	$$ \int\limits_{-\infty}^{+\infty} e^{i x y} \,dx = 2\pi \delta(y) $$
-	$$ \sum\limits_{k = -\infty}^{+\infty} e^{i k x} = 2\pi \sum\limits_{p = -\infty}^{+\infty}\delta(x - 2\pi p) $$ - формула суммирования Пуассона
-	$$ \int\limits_{-\infty}^{+\infty}\vert \phi(x)\vert^2 \,dx = frac{1}{2\pi}\int\limits_{-\infty}^{+\infty}\vert \widehat{\phi}(\omega)\vert^2 d\omega $$ - равенство Парсеваля
+	$$ \sum\limits_{k = -\infty}^{+\infty} e^{i k x} = 2\pi \sum\limits_{p = -\infty}^{+\infty}\delta(x - 2\pi p) $$ -- формула суммирования Пуассона
+	$$ \int\limits_{-\infty}^{+\infty}\vert \phi(x)\vert^2 \,dx = frac{1}{2\pi}\int\limits_{-\infty}^{+\infty}\vert \widehat{\phi}(\omega)\vert^2 d\omega $$ -- равенство Парсеваля
 
 	\begin{definit}[ Свертка обобщенной функции  ] 
 		\begin{equation}
@@ -680,14 +691,16 @@
 	\end{definit}
 	
 	\begin{lemma}[ Шварца ]
-		$ g \in Z' ,\phi \in Z(R^2)\Rightarrow (g(y) ,u(x ,y))\in Z $
+	
+		Пусть $g$ принадлежит пространству $\mathfrak{L}'$, а $\phi$ из пространства Шварца $(\,\mathfrak{L}(\mathbb{R}^2)\,)$, 
+		тогда $ (g(y) ,\phi(x ,y)) $ лежит в пространстве $\mathfrak{L}$.
 		\begin{proof}[ Доказательство ]
 			 $ \fbox{?} $ следует из следующей теоремы.
 		\end{proof}
 	\end{lemma}
 	
 	\begin{theorem}
-	Если
+		Если функция $f$ и функция $g$ принадлежат простравнству $\mathfrak{L}'$, то и их свертка принадлежит этому же пространству $\mathfrak{L}'$:
 		\begin{equation}
 			f \in Z' ,g\in Z' \Rightarrow f * g \in Z'.
 		\end{equation}
@@ -695,9 +708,10 @@
 	\end{theorem}
 	
 	\begin{theorem}[ о свертке ]
-		$ f \in Z' ,g\in Z' $ и $ g -$ финитна $\Rightarrow $ финитная функция - это функция с конечным носителем.
+	
+		Если функция $f$ и функция $g$ принадлежат простравнству $\mathfrak{L}'$ и $g$ -- финитна, то 
 		\begin{equation}
-			\Rightarrow \fbox{$ F[f * g] = F[f][g] $}
+			\fbox{$ F[f * g] = F[f][g] $}
 		\end{equation}
 
 		\begin{proof}[ Доказательство ]
@@ -711,7 +725,7 @@
 				= (f(x) ,\int\limits_{-\infty}^{+\infty}\int\limits_{-\infty}^{+\infty} g(y)e^{i \xi (x + y)} \phi(\xi) d\xi \,dy) = \\
 				(f , F[\phi(\xi)F[g](\xi)]) = (F[f] ,\phi F[g]) = \\
 			\end{gather*}
-			т.к. g - финитна, то $ F[g] = C^{\infty} $ а такую функцию можно переименовать в скалярное произведение из левой в правую
+			т.к. g -- финитна, то $ F[g] = C^{\infty} $ а такую функцию можно переименовать в скалярное произведение из левой в правую
 			$ = (F[f]F[g] ,\phi) $
 		\end{proof}
 	
@@ -722,7 +736,7 @@
 		\begin{equation}
 			f(x) =\frac{1}{2\pi}\int\limits_{-\infty}^{+\infty} \widehat{f}(\omega)e^{- i \omega x}d\omega
 		\end{equation}
-		представляет интеграл фурье и это преобразование имеет конечный носитель $ \widehat{f}(\omega) = 0 $ при $ \vert \omega \vert > \frac{\pi}{\Delta} $ - частота Найквиста
+		представляет интеграл фурье и это преобразование имеет конечный носитель $ \widehat{f}(\omega) = 0 $ при $ \vert \omega \vert > \frac{\pi}{\Delta} $ -- частота Найквиста
 		\begin{equation}
 			\Rightarrow \fbox{$ \frac{\Delta}{\pi}\sum\limits_{k = -\infty}^{+\infty}f(k \delta)\frac{\sin\pi(x - k\delta)/\delta}{(x - k\delta)} = f(x)_{x\in R} $}
 		\end{equation}
@@ -737,21 +751,9 @@
 		$$ x\in L_2 \Leftrightarrow \sum\limits_{j = -\infty}^{+\infty} \vert x_j \vert^{2} < +\infty .$$
 	\end{definit}
 
-	%\begin{definit}[ $ \delta $ функция ] 
-
-	Пусть $ x_j - $символ Кронекера
-	
-	%$$ x_j = \delta_{j} = $$
-	%\left \{\begin{array}
-	
-	%1,\qquad j = 0\\
-	%0,\qquad j\neq 0
-	%\end{equation}.\eqno (3.18)$$- т.е.короткий еденичный импульс
-	
-	$$ (f * x)_k = \sum\limits_{j} f_j x_{k - j} = f_k $$
-	
-	%$$\left\{\begin{array} \eqno (1,\qquad j = 0)\\ \eqno (0,\qquad j\neq 0)\end{array}$$
-	
+	Пусть $ x_j$ -- символ Кронекера
+		
+	$$ (f * x)_k = \sum\limits_{j} f_j x_{k - j} = f_k $$	
 	
 	\begin{definit}[ Передаточная функция ] 
 		\begin{equation}
@@ -764,6 +766,8 @@
 	\end{definit}
 	
 	\begin{theorem}
+	
+		Если на вход подать синусоиду (точнее i-ую экс-ту)
 		\begin{equation}
 			x_j = e^{- i j \phi}\Rightarrow (f * x)_k  = x_k T(\phi)
 		\end{equation}
@@ -782,12 +786,30 @@
 	\end{theorem}
 	
 	\begin{definit}[ Дискретное преобразование фурье ] 
+
+		Дискретное преобразование Фурье (в англоязычной литературе DFT, 
+		Discrete Fourier Transform) -- это одно из преобразований Фурье, 
+		широко применяемых в алгоритмах цифровой обработки сигналов 
+		(его модификации применяются в сжатии звука в MP3, сжатии 
+		изображений в JPEG и др.), а также в других областях, связанных 
+		с анализом частот в дискретном (к примеру, оцифрованном 
+		аналоговом) сигнале. Дискретное преобразование Фурье требует 
+		в качестве входа дискретную функцию. Такие функции часто 
+		создаются путём дискретизации (выборки значений из непрерывных 
+		функций). Дискретные преобразования Фурье помогают решать 
+		частные дифференциальные уравнения и выполнять такие операции, 
+		как свёртки. Дискретные преобразования Фурье также активно 
+		используются в статистике, при анализе временных рядов. 
+		Преобразования бывают одномерные, двумерные и даже трёхмерные.
+
 		\begin{equation}
-			\widehat{f}_k = \sum\limits_{j = 0}^{n - 1}f_j e^{i 2 \pi j k/n}
+			\widehat{f}_k = \sum\limits_{j = 0}^{n - 1}f_j e^{\frac{i 2 \pi j k}{n} }
 		\end{equation}
-		$ k = 0,1,2,...  \ n $- длина сигнала.
+
+		$ k = 0,1,2,...  \ n-1$ -- длина сигнала.
 		
 		$ \widehat{f}_{k + n} = \widehat{f}_k. $
+
 	\end{definit}
 	
 	\begin{theorem}
@@ -821,9 +843,9 @@
 	
 	\begin{definit}[ Взаимная ковариация(корреляция) ] 
 		$$ C_{u,v}(h) = \int\limits_{-\infty}^{+\infty}u^{*}(x)v(x + h)\,dx $$
-		нормированная ковариация - если это разделим на норму этих векторов.
+		нормированная ковариация -- если это разделим на норму этих векторов.
 		
-		автоковариация - 
+		автоковариация -- 
 		
 		$$ A_u(h) = C_{u,u}(h) = \int\limits_{-\infty}^{+\infty}u^{*}u(x + h)\,dx. $$
 	\end{definit}
@@ -838,10 +860,10 @@
 	
 	\begin{definit}[ Стационарный случайный процесс  U(t) ] 
 	
-		M - математическое ожидание
+		M -- математическое ожидание
 		$$ M[u(t)] = 0  ,\ M[u^{*}(t)u(t + h)] = a(h) $$ не зависит от t
 		
-		Эргодичность - усреднение по реализации совпадает с усредднением по аргументу(взаим.ков.)
+		Эргодичность -- усреднение по реализации совпадает с усредднением по аргументу(взаим.ков.)
 		
 		$$ M[u^{*}(t)u(t + h)] = \lim_{b\to +\infty} \frac{1}{2\pi}\int\limits_{-b}^{b}u^{*}(t)u(t + h) \,dt. $$
 	\end{definit}
@@ -853,14 +875,14 @@
 	
 	Окрашенный шум = фильтр * белый шум
 	
-	* - свернуть с ...
+	* -- свернуть с ...
 	
 	\begin{definit}[ Винеревский формирующий фильтр ] 
 	
-		u,v - даны сигналы
-		f - ?
+		u,v -- даны сигналы
+		f -- ?
 		
-		$ f * v  \approx v $- к фильтру применим u получим v
+		$ f * v  \approx v $-- к фильтру применим u получим v
 		
 		МНК(LSM) берем норму и минимизируем по фильтру f
 		
@@ -879,12 +901,12 @@
 	
 	\section{ Минимально-фазовые фильтры. Обратные фильтры }
 	
-	\begin{definit}[ Z - преобразование ] 
+	\begin{definit}[ Z -- преобразование ] 
 	
 		если есть $ \{f_k\}  ,\ k\in Z $
 		\item $ Z[]f $ превращение
 		\item $ Z[f](z) = \sum\limits_{k = -\infty}^{+\infty} f_k Z^k  ,\ z\in C $
-		\item $ Z[f] = 0 $ - характеристическое уравнение для f.
+		\item $ Z[f] = 0 $ -- характеристическое уравнение для f.
 	\end{definit}
 	
 	\begin{theorem}
@@ -910,7 +932,7 @@
 	
 	Диполь (a.b) называется min-фазовым, если $ \vert a\vert >\vert b\vert. $
 	
-	Фильтр называется min-фазовым, если он свертка минимально - фазовых диполей.
+	Фильтр называется min-фазовым, если он свертка минимально -- фазовых диполей.
 	\end{definit}
 	
 	\begin{theorem}[ Робинсона ]
@@ -919,7 +941,7 @@
 		
 		рассмотрим 2 фильтра f и g , у них одинаковые амплитудные спектры
 		
-		f - мин-фазовый
+		f -- мин-фазовый
 		
 		оба фильтра причинные, т.е. нумерация с 0 $ \Rightarrow \sum\limits_{k = 0}^{l}\vert f_k\vert^{2} \geq \sum\limits_{k = 0}^{l}\vert g_k\vert^{2}  \ \forall l $
 		
@@ -927,7 +949,7 @@
 	
 	\begin{theorem}[ Колмагорова ]
 	
-		Если  f - причинный, мин-фазовый фильтр, то аргумент его передаточной функции выражается через
+		Если  f -- причинный, мин-фазовый фильтр, то аргумент его передаточной функции выражается через
 		$$ arg T_f(\phi) = \frac{1}{2\pi}\int\limits_{-\pi}^{\pi}\ln\vert T(\phi')\vert \frac{\phi' - \phi}{2}d \phi' $$
 		
 	\end{theorem}
